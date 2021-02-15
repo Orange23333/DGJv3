@@ -53,7 +53,7 @@ namespace DGJv3
         {
             try
             {
-                File.WriteAllText(Utilities.LyricOutputFilePath, e.CurrentLyric + Environment.NewLine + e.UpcomingLyric);
+                System.IO.File.WriteAllText(Utilities.LyricOutputFilePath, e.CurrentLyric + Environment.NewLine + e.UpcomingLyric);
             }
             catch (Exception) { }
         }
@@ -68,7 +68,7 @@ namespace DGJv3
                     Result = "模板有语法错误" + Environment.NewLine + string.Join(Environment.NewLine, localtemplate.Messages);
                     try
                     {
-                        File.WriteAllText(Utilities.ScribanOutputFilePath, Result);
+                        System.IO.File.WriteAllText(Utilities.ScribanOutputFilePath, Result);
                     }
                     catch (Exception) { }
                 }
@@ -114,7 +114,7 @@ namespace DGJv3
 
                 try
                 {
-                    File.WriteAllText(Utilities.ScribanOutputFilePath, Result);
+                    System.IO.File.WriteAllText(Utilities.ScribanOutputFilePath, Result);
                 }
                 catch (Exception) { }
             }
@@ -125,7 +125,7 @@ namespace DGJv3
                     try
                     {
                         Result = "模板有错误" + Environment.NewLine + string.Join(Environment.NewLine, template.Messages);
-                        File.WriteAllText(Utilities.ScribanOutputFilePath, Result);
+                        System.IO.File.WriteAllText(Utilities.ScribanOutputFilePath, Result);
                     }
                     catch (Exception) { }
                 }

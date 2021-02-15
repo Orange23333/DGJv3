@@ -96,7 +96,6 @@ namespace DGJv3
         /// <param name="id">插件ID</param>
         public VersionChecker(string id) : this(id, DEFAULT_BASE_URL)
         { }
-
         /// <summary>
         /// 新建一个指定服务器地址的版本检查类
         /// </summary>
@@ -116,8 +115,9 @@ namespace DGJv3
         {
             try
             {
-                Uri fullUri = new Uri(BaseUrl + API_PATH + this.Id);
-                string json = HttpGet(fullUri);
+                //Uri fullUri = new Uri(BaseUrl + API_PATH + this.Id);
+                Uri fullUri = new Uri(String.Format("https://api.github.com/repos/{0}/releases/latest", this.Id));
+                string json = HttpGet(fullUri, 10000);
                 JObject j = JObject.Parse(json);
 
                 if (j["id"].ToString() != this.Id)
@@ -125,13 +125,13 @@ namespace DGJv3
                 else
                 {
                     this.Name = j["name"].ToString();
-                    this.Author = j["author"].ToString();
-                    this.Version = new Version(j["version"].ToString());
+                    this.Author = j["author"]["login"].ToString();
+                    this.Version = new Version(j["tag_name"].ToString());
                     this.Description = j["description"].ToString();
 
                     //this.UpdateTime = DateTime.ParseExact(j["updatetime"].ToString(), "yyyy.MM.dd", CultureInfo.InvariantCulture);
                     this.UpdateDateTime = DateTimeOffset.Parse(j["update_datetime"].ToString(), null).DateTime;
-                    this.UpdateDescription = j["update_desc"].ToString();
+                    this.UpdateDescription = j["body"].ToString();
 
                     //this.DownloadUrl = j["dl_url"].ToString().StartsWith("http") ? new Uri(j["dl_url"].ToString()) : new Uri(this.BaseUrl + j["dl_url"].ToString());
                     this.DownloadUrl = new Uri(new Uri(this.BaseUrl), j["dl_url"].ToString());
@@ -152,7 +152,6 @@ namespace DGJv3
         /// <returns>检查结果</returns>
         public bool HasNewVersion(string version)
         { return HasNewVersion(new Version(version)); }
-
         /// <summary>
         /// 检查是否具有更新的版本
         /// </summary>
@@ -163,10 +162,13 @@ namespace DGJv3
         // version对象比参数小（之前，older的版本）
 
 
-        private string HttpGet(Uri uri)
+        private string HttpGet(Uri uri, int timeout)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             //request.AutomaticDecompression = DecompressionMethods.GZip;
+            request.Method = "GET";
+            request.UserAgent = "User-Agent:Mozilla/5.0 (Windows NT 10; WOW64)";
+            request.Timeout = timeout;
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
             using (StreamReader reader = new StreamReader(stream))

@@ -1,4 +1,4 @@
-﻿using DGJv3.InternalModule;
+﻿//using DGJv3.InternalModule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +17,6 @@ namespace DGJv3
         private SearchModule primaryModule;
         private SearchModule secondaryModule;
 
-
         internal SearchModules()
         {
             Modules = new ObservableCollection<SearchModule>();
@@ -25,11 +24,11 @@ namespace DGJv3
             NullModule = new NullSearchModule();
             Modules.Add(NullModule);
 
-            Modules.Add(new LwlApiNetease());
-            Modules.Add(new LwlApiTencent());
-            Modules.Add(new LwlApiKugou());
-            Modules.Add(new LwlApiBaidu());
-            Modules.Add(new LwlApiXiami());
+            //Modules.Add(new LwlApiNetease());
+            //Modules.Add(new LwlApiTencent());
+            //Modules.Add(new LwlApiKugou());
+            //Modules.Add(new LwlApiBaidu());
+            //Modules.Add(new LwlApiXiami());
 
             // TODO: 加载外置拓展
 

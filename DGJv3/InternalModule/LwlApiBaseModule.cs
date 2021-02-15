@@ -62,7 +62,7 @@ namespace DGJv3.InternalModule
             }
             catch (Exception ex)
             {
-                Log($"歌曲 {songInfo.SongName} 疑似版权不能下载(ex:{ex.Message})");
+                Log($"歌曲 {songInfo.SongName} 疑似因为版权不能下载(ex:{ex.Message})");
                 return null;
             }
         }

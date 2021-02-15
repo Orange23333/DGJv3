@@ -72,7 +72,7 @@ namespace DGJv3
             {
                 try
                 {
-                    var str = File.ReadAllText(Utilities.ConfigFilePath, Encoding.UTF8);
+                    var str = System.IO.File.ReadAllText(Utilities.ConfigFilePath, Encoding.UTF8);
                     config = JsonConvert.DeserializeObject<Config>(str);
                 }
 
@@ -87,7 +87,7 @@ namespace DGJv3
         {
             try
             {
-                File.WriteAllText(Utilities.ConfigFilePath, JsonConvert.SerializeObject(config), Encoding.UTF8);
+                System.IO.File.WriteAllText(Utilities.ConfigFilePath, JsonConvert.SerializeObject(config), Encoding.UTF8);
             }
             catch (Exception ex)
             {
