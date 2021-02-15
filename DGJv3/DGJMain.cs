@@ -30,7 +30,7 @@ namespace DGJv3
             PluginName = "点歌姬";
             PluginVer = BuildInfo.Version;
             PluginDesc = "使用弹幕点播歌曲";
-            PluginAuth = "Genteure/橘子233";
+            PluginAuth = "Genteure";
             PluginCont = "https://github.com/Orange23333/DGJv3/issues";
 
             try

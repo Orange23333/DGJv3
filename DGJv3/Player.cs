@@ -248,6 +248,7 @@ namespace DGJv3
         {
             if (Songs.Count > 0 && Songs[0].Status == SongStatus.WaitingPlay)
             {
+                //续歌
                 LoadSong(Songs[0]);
             }
             else if (Songs.Count > 1
@@ -257,7 +258,9 @@ namespace DGJv3
                          s => s.UserName != Utilities.SparePlaylistUser)?.Status == SongStatus.WaitingPlay
                      && IsUserPrior)
             {
+                //如果下一首歌为用户点歌（且用户点歌优先）则切换至用户点歌
                 Next();
+                //移除空闲歌单
                 var pendingRemove = Songs.Where(s => s.UserName == Utilities.SparePlaylistUser).ToList();
                 foreach (var songItem in pendingRemove)
                 {
@@ -268,13 +271,20 @@ namespace DGJv3
             if (Songs.Count < 2 && IsPlaylistEnabled && Playlist.Count > 0)
             {
                 int index = -1;
-                int time = 0;
-                do
-                {
-                    index = random.Next(0, Playlist.Count);
-                    time++;
-                } while (Songs.Any(ele => Playlist[index].Id == ele.SongId) && time < 3);
 
+                //单线程思维：PlayList不会变
+                if (Playlist.Count == 1)
+                {
+                    index = 0;
+                }
+                else
+                {
+                    do
+                    {
+                        //切记：Random是[min, max)
+                        index = random.Next(0, Playlist.Count);
+                    } while (Songs.Any(ele => Playlist[index].Id == ele.SongId));
+                }
 
                 SongInfo info = Playlist[index];
                 if (info.Lyric == null)
