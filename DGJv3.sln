@@ -19,8 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{1872DC17-5E83-
 	ProjectSection(SolutionItems) = preProject
 		CI\appveyor_deploy.ps1 = CI\appveyor_deploy.ps1
 		CI\appveyor_install.ps1 = CI\appveyor_install.ps1
-		CI\patch_buildinfo.bak.ps1 = CI\patch_buildinfo.bak.ps1
 		CI\patch_buildinfo.ps1 = CI\patch_buildinfo.ps1
+		CI\patch_buildinfo.ps1.DEL = CI\patch_buildinfo.ps1.DEL
 	EndProjectSection
 EndProject
 Global
