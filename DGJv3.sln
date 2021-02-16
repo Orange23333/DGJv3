@@ -12,6 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		README.md = README.md
+		VERSION = VERSION
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{1872DC17-5E83-4575-9C2D-56EF0B1D453B}"
+	ProjectSection(SolutionItems) = preProject
+		CI\appveyor_deploy.ps1 = CI\appveyor_deploy.ps1
+		CI\appveyor_install.ps1 = CI\appveyor_install.ps1
+		CI\patch_buildinfo.bak.ps1 = CI\patch_buildinfo.bak.ps1
+		CI\patch_buildinfo.ps1 = CI\patch_buildinfo.ps1
 	EndProjectSection
 EndProject
 Global
@@ -27,6 +36,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1872DC17-5E83-4575-9C2D-56EF0B1D453B} = {A571DA3A-20FA-4A8E-937B-CDFA7F717215}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0426D19B-D35A-40EB-AF6F-0999FFEED9FC}
